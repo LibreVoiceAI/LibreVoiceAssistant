@@ -1,0 +1,23 @@
+cmake_minimum_required(VERSION 3.16.0)
+set(QT_MIN_VERSION "6.4.0")
+
+find_package(ECM CONFIG REQUIRED)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_CXX_STANDARD 17)
+
+include(FeatureSummary)
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
+
+
+find_package(PkgConfig REQUIRED)
+find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
+    Quick
+    Core
+    Qml
+    Network
+    WebSockets
+)
+
+add_definitions(-DQT_NO_URL_CAST_FROM_STRING -DQT_USE_QSTRINGBUILDER -DQT_NO_CAST_TO_ASCII -DQT_NO_CAST_FROM_ASCII)
+feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
